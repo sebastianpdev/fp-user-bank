@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: fp-user
+
+    datasource:
+      url: jdbc:postgresql://db:5432/fpbank?currentSchema=bank_schema
+      username: postgres
+      password: postgres
+      driver-class-name: org.postgresql.Driver
+      jpa:
+        properties:
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            ddl-auto: none
+            format_sql: true
+
