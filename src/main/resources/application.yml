@@ -2,6 +2,7 @@ spring:
   application:
     name: fp-user
 
+  #  use db as datasource service name for generate image
   datasource:
     url: jdbc:postgresql://localhost:5432/fpbank?currentSchema=bank_schema
     username: postgres
@@ -11,6 +12,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: none
+        ddl-auto: update
         format_sql: true
 
