@@ -29,9 +29,15 @@ public class ClientePersistence implements IClientePersistence {
     @Override
     public DetailClientDTO actualizarCliente(Cliente cliente) {
         try {
+            ClienteEntity clientStored = clienteRepository.findById(cliente.getId()).orElse(null);
+            if (clientStored == null) {
+                throw new BasicException(HttpStatus.NOT_FOUND, ErrorCodeMessage.USER_NOT_FOUND);
+            }
+
             ClienteEntity clientUpdated = clienteMapper.toCliente(cliente);
-            clientUpdated = clienteRepository.save(clientUpdated);
-            return clienteMapper.toDetailCliente(clientUpdated);
+            clienteMapper.updateCliente(clientStored, clientUpdated);
+            clientStored = clienteRepository.save(clientStored);
+            return clienteMapper.toDetailCliente(clientStored);
         } catch (DataAccessException e) {
             throw new BasicException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCodeMessage.USER_DATA_ERROR);
         }

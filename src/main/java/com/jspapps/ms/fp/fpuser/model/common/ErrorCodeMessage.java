@@ -1,5 +1,8 @@
 package com.jspapps.ms.fp.fpuser.model.common;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorCodeMessage {
 
     GENERAL_ERROR(901, "Consulte con el administrador del sistema"),
@@ -20,14 +23,6 @@ public enum ErrorCodeMessage {
     ErrorCodeMessage(int code, String message) {
         this.code = code;
         this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public String toStringCode() {

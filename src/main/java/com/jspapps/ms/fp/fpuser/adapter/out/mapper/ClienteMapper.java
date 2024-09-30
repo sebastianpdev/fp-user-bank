@@ -34,4 +34,22 @@ public class ClienteMapper {
                 clienteEntity.getDateModified()
                 );
     }
+
+    public void updateCliente(ClienteEntity clienteStored, ClienteEntity clienteUpdated) {
+        if (clienteUpdated.getIdentificationType() != null) {
+            clienteStored.setIdentificationType(clienteUpdated.getIdentificationType());
+        }
+        if (clienteUpdated.getNombres() != null) {
+            clienteStored.setNombres(clienteUpdated.getNombres());
+        }
+        if (clienteUpdated.getApellidos() != null) {
+            clienteStored.setApellidos(clienteUpdated.getApellidos());
+        }
+        if (clienteUpdated.getEmail() != null) {
+            clienteStored.setEmail(clienteUpdated.getEmail());
+        }
+        if (clienteUpdated.getBirthDate() != null) {
+            clienteStored.setBirthDate(clienteUpdated.getBirthDate());
+        }
+    }
 }

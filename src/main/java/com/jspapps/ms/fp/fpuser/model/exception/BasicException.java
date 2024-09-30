@@ -1,8 +1,10 @@
 package com.jspapps.ms.fp.fpuser.model.exception;
 
 import com.jspapps.ms.fp.fpuser.model.common.ErrorCodeMessage;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class BasicException extends ServiceInvocationException {
 
     private static final long serialVersionUID = -21564845555522L;

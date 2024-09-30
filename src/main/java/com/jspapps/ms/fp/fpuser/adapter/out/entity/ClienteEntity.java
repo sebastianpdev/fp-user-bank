@@ -19,9 +19,12 @@ public class ClienteEntity extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column private IdentificationType identificationType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_identificacion")
+    private IdentificationType identificationType;
 
-    @Column private String identificationNumber;
+    @Column(name = "identificacion")
+    private String identificationNumber;
 
     @Column private String nombres;
 
@@ -31,5 +34,6 @@ public class ClienteEntity extends AuditEntity {
 
     @Column private int edad;
 
-    @Column private LocalDate birthDate;
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 }
