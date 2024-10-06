@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
 
+@NoArgsConstructor
 @Getter
 @Setter
 public class Cliente {

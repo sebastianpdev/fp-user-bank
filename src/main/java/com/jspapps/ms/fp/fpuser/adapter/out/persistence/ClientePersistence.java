@@ -22,7 +22,7 @@ public class ClientePersistence implements IClientePersistence {
 
     @Override
     public void crearCliente(Cliente cliente) {
-        ClienteEntity newClient = clienteMapper.toCliente(cliente);
+        ClienteEntity newClient = clienteMapper.toEntity(cliente);
         clienteRepository.save(newClient);
     }
 
@@ -30,10 +30,10 @@ public class ClientePersistence implements IClientePersistence {
     public DetailClientDTO actualizarCliente(Cliente cliente) {
         try {
             ClienteEntity clientStored = findClienteEntity(cliente.getId());
-            ClienteEntity clientUpdated = clienteMapper.toCliente(cliente);
-            clienteMapper.updateCliente(clientStored, clientUpdated);
+            ClienteEntity clientUpdated = clienteMapper.toEntity(cliente);
+            clienteMapper.updateProductoSaved(clientUpdated, clientStored);
             clientStored = clienteRepository.save(clientStored);
-            return clienteMapper.toDetailCliente(clientStored);
+            return clienteMapper.toDetailClientDTO(clientStored);
         } catch (DataAccessException e) {
             throw new BasicException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCodeMessage.USER_DATA_ERROR);
         }
@@ -48,7 +48,7 @@ public class ClientePersistence implements IClientePersistence {
     @Override
     public DetailClientDTO findCliente(Long id) {
         ClienteEntity cliente = findClienteEntity(id);
-        return clienteMapper.toDetailCliente(cliente);
+        return clienteMapper.toDetailClientDTO(cliente);
     }
 
     private ClienteEntity findClienteEntity(Long id) {

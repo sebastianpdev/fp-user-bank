@@ -3,53 +3,31 @@ package com.jspapps.ms.fp.fpuser.adapter.out.mapper;
 import com.jspapps.ms.fp.fpuser.adapter.out.entity.ClienteEntity;
 import com.jspapps.ms.fp.fpuser.model.cliente.Cliente;
 import com.jspapps.ms.fp.fpuser.model.cliente.DetailClientDTO;
-import org.springframework.stereotype.Component;
+import org.mapstruct.*;
 
-@Component
-public class ClienteMapper {
+@Mapper(componentModel = "spring")
+public interface ClienteMapper extends EntityMapper<Cliente, ClienteEntity> {
 
-    public ClienteEntity toCliente(Cliente cliente) {
-        return ClienteEntity.builder()
-                .id(cliente.getId() != null ? cliente.getId() : null)
-                .identificationType(cliente.getIdentificationType())
-                .identificationNumber(cliente.getIdentificationNumber())
-                .nombres(cliente.getNombres())
-                .apellidos(cliente.getApellidos())
-                .email(cliente.getEmail())
-                .edad(cliente.getEdad())
-                .birthDate(cliente.getBirthDate())
-                .build();
-    }
+    ClienteEntity toEntity(Cliente cliente);
 
-    public DetailClientDTO toDetailCliente(ClienteEntity clienteEntity) {
-        return new DetailClientDTO(
-                clienteEntity.getId(),
-                clienteEntity.getIdentificationType(),
-                clienteEntity.getIdentificationNumber(),
-                clienteEntity.getNombres(),
-                clienteEntity.getApellidos(),
-                clienteEntity.getEmail(),
-                clienteEntity.getBirthDate(),
-                clienteEntity.getDateCreated(),
-                clienteEntity.getDateModified()
-                );
-    }
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateProductoSaved(ClienteEntity clienteUpdated, @MappingTarget ClienteEntity clienteSaved);
 
-    public void updateCliente(ClienteEntity clienteStored, ClienteEntity clienteUpdated) {
-        if (clienteUpdated.getIdentificationType() != null) {
-            clienteStored.setIdentificationType(clienteUpdated.getIdentificationType());
+    @Mappings({
+            @Mapping(source = "nombres", target = "nombre"),
+            @Mapping(source = "apellidos", target = "apellido"),
+            @Mapping(source = "dateCreated", target = "fechaCreacion"),
+            @Mapping(source = "dateModified", target = "fechaModificacion")
+    })
+    DetailClientDTO toDetailClientDTO(ClienteEntity cliente);
+
+    default ClienteEntity fromId(Long id) {
+        if (id == null) {
+            return null;
         }
-        if (clienteUpdated.getNombres() != null) {
-            clienteStored.setNombres(clienteUpdated.getNombres());
-        }
-        if (clienteUpdated.getApellidos() != null) {
-            clienteStored.setApellidos(clienteUpdated.getApellidos());
-        }
-        if (clienteUpdated.getEmail() != null) {
-            clienteStored.setEmail(clienteUpdated.getEmail());
-        }
-        if (clienteUpdated.getBirthDate() != null) {
-            clienteStored.setBirthDate(clienteUpdated.getBirthDate());
-        }
+
+        ClienteEntity cliente = new ClienteEntity();
+        cliente.setId(id);
+        return cliente;
     }
 }
