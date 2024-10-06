@@ -36,4 +36,9 @@ public class ClienteEntity extends AuditEntity {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    public ClienteEntity id(Long id) {
+        this.id = id;
+        return this;
+    }
 }

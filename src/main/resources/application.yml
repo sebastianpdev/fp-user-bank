@@ -17,3 +17,9 @@ spring:
     show-sql: true
     generate-ddl: true
 
+logging:
+  file:
+    name: ./logs/fp-user.log
+  level:
+    root: INFO
+

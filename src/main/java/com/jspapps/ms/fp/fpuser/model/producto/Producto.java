@@ -2,13 +2,17 @@ package com.jspapps.ms.fp.fpuser.model.producto;
 
 import com.jspapps.ms.fp.fpuser.model.common.AccountState;
 import com.jspapps.ms.fp.fpuser.model.common.AccountType;
+import com.jspapps.ms.fp.fpuser.model.common.ErrorCodeMessage;
+import com.jspapps.ms.fp.fpuser.model.exception.BasicException;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
 public abstract class Producto {
 
+    private Long id;
     private final String numeroCuenta;
     private final AccountType tipoCuenta;
     private AccountState estado;
@@ -39,7 +43,7 @@ public abstract class Producto {
         if (saldo == 0) {
             this.estado = AccountState.CANCELADA;
         } else {
-            throw new RuntimeException("No se puede cancelar la cuenta. El saldo debe ser 0.");
+            throw new BasicException(HttpStatus.BAD_REQUEST, ErrorCodeMessage.ACCOUNT_CANCELED_REQUEST);
         }
     }
 

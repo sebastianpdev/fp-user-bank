@@ -29,11 +29,7 @@ public class ClientePersistence implements IClientePersistence {
     @Override
     public DetailClientDTO actualizarCliente(Cliente cliente) {
         try {
-            ClienteEntity clientStored = clienteRepository.findById(cliente.getId()).orElse(null);
-            if (clientStored == null) {
-                throw new BasicException(HttpStatus.NOT_FOUND, ErrorCodeMessage.USER_NOT_FOUND);
-            }
-
+            ClienteEntity clientStored = findClienteEntity(cliente.getId());
             ClienteEntity clientUpdated = clienteMapper.toCliente(cliente);
             clienteMapper.updateCliente(clientStored, clientUpdated);
             clientStored = clienteRepository.save(clientStored);
@@ -41,5 +37,25 @@ public class ClientePersistence implements IClientePersistence {
         } catch (DataAccessException e) {
             throw new BasicException(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCodeMessage.USER_DATA_ERROR);
         }
+    }
+
+    @Override
+    public boolean existsCliente(Long id) {
+        findClienteEntity(id);
+        return true;
+    }
+
+    @Override
+    public DetailClientDTO findCliente(Long id) {
+        ClienteEntity cliente = findClienteEntity(id);
+        return clienteMapper.toDetailCliente(cliente);
+    }
+
+    private ClienteEntity findClienteEntity(Long id) {
+        ClienteEntity cliente = clienteRepository.findById(id).orElse(null);
+        if (cliente == null) {
+            throw new BasicException(HttpStatus.NOT_FOUND, ErrorCodeMessage.USER_NOT_FOUND);
+        }
+        return cliente;
     }
 }

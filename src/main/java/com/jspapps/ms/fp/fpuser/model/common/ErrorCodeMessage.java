@@ -15,7 +15,9 @@ public enum ErrorCodeMessage {
 
     ACCOUNT_NOT_FOUND(907, "Cuenta no encontrada"),
     ACCOUNT_STATE_INVALID(908, "Esta cuenta se encuentra inactiva o cancelada"),
-    ACCOUNT_TYPE_INVALID(909, "Este tipo de cuenta no está soportado");
+    ACCOUNT_TYPE_INVALID(909, "Este tipo de cuenta no está soportado"),
+    ACCOUNT_DATA_ERROR(910, "La cuenta no se pudo crear"),
+    ACCOUNT_CANCELED_REQUEST(911, "No se puede cancelar la cuenta. El saldo debe ser 0.");
 
     private final int code;
     private final String message;

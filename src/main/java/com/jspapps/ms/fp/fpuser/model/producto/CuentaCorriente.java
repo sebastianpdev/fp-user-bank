@@ -1,6 +1,7 @@
 package com.jspapps.ms.fp.fpuser.model.producto;
 
 import com.jspapps.ms.fp.fpuser.model.common.AccountType;
+import com.jspapps.ms.fp.fpuser.model.common.BusinessRuleConstants;
 import com.jspapps.ms.fp.fpuser.model.common.Utils;
 
 public class CuentaCorriente extends Producto {
@@ -11,6 +12,6 @@ public class CuentaCorriente extends Producto {
 
     @Override
     protected String generarNumeroCuenta(AccountType accountType) {
-        return "33" + Utils.generarNumeroAleatorio();
+        return BusinessRuleConstants.CUENTA_CORRIENTE_INICIAL + Utils.generarNumeroAleatorio();
     }
 }

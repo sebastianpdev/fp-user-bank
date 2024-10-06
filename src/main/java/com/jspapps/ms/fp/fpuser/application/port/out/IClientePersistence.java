@@ -7,4 +7,6 @@ public interface IClientePersistence {
 
     void crearCliente(Cliente cliente);
     DetailClientDTO actualizarCliente(Cliente cliente);
+    DetailClientDTO findCliente(Long id);
+    boolean existsCliente(Long id);
 }

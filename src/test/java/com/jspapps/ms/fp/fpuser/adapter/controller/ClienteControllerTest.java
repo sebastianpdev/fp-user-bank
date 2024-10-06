@@ -1,4 +1,4 @@
-package com.jspapps.ms.fp.fpuser.application.controller;
+package com.jspapps.ms.fp.fpuser.adapter.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jspapps.ms.fp.fpuser.adapter.in.rest.ClienteController;

@@ -36,7 +36,7 @@ public class ProductoEntity extends AuditEntity {
     @Column(name = "exenta_gmf")
     private boolean exentaGMF;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;
 
